@@ -1,0 +1,40 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+struct time
+{
+    int st;
+    int et;
+};
+bool cmp(time &a, time &b)
+{
+    return a.et < b.et;
+}
+
+int main()
+{
+    int n;
+    int m = 1; //这里的m应该放在循环里面初始化
+    time a[100];
+    while (scanf("%d", &n) != EOF && n != 0)
+    {
+
+        for (int i = 0; i < n; i++)
+        {
+            scanf("%d%d", &a[i].st, &a[i].et);
+        }
+        sort(a, a + n, cmp);
+        int next = a[0].et;
+        for (int i = 1; i < n; i++)
+        {
+            if (a[i].st >= next)
+            {
+                m++;
+                next = a[i].et;
+            }
+        }
+        cout << m << endl;
+    }
+
+    return 0;
+}
